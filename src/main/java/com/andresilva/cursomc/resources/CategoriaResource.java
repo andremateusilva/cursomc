@@ -16,7 +16,6 @@ public class CategoriaResource {
 	// na boa prtica do rest deve-se identificar correctamente os verbos http para cada operação que queremos neste caso o Get 
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Categoria> listar() {
-		
 		Categoria cat1 = new Categoria(1, "Informática");
 		Categoria cat2 = new Categoria(2, "Escritório");
 		
