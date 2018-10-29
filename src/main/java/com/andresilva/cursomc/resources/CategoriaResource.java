@@ -1,13 +1,6 @@
 package com.andresilva.cursomc.resources;
 
-import java.util.List;
-
-import javax.xml.ws.Response;
-
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
