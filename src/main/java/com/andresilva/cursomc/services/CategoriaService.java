@@ -20,6 +20,6 @@ public class CategoriaService {
 		
 		//return categoria.orElse(null);
 		return categoria.orElseThrow(() -> new ObjectNotFoundException(    
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName())); 
+				"Objeto não encontrado! id: " + id + ", Tipo: " + Categoria.class.getName())); 
 	}
 }

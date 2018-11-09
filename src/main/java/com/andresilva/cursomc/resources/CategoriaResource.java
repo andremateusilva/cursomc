@@ -14,10 +14,10 @@ import com.andresilva.cursomc.domain.Categoria;
 import com.andresilva.cursomc.services.CategoriaService;
 
 @RestController
-@RequestMapping(value = "/categorias") // na boa pratica o rest coloca-se o verbo do end point no plural
+@RequestMapping(value = "/categorias") // na boa prática o rest coloca-se o verbo do end point no plural
 public class CategoriaResource {
 	
-	// na boa prtica do rest deve-se identificar correctamente os verbos http para cada operação que queremos neste caso o Get 
+	// na boa pratica do rest deve-se identificar correctamente os verbos http para cada operação que queremos neste caso o Get 
 //	@RequestMapping(method=RequestMethod.GET)
 //	public List<Categoria> listar() {
 //		Categoria cat1 = new Categoria(1, "Informática");
@@ -35,8 +35,8 @@ public class CategoriaResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> listar(@PathVariable Integer id) {
+
 		Categoria categoria = service.buscar(id);
-		
 		return ResponseEntity.ok().body(categoria);
 	}
 }
