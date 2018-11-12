@@ -11,7 +11,7 @@ import com.andresilva.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
-	
+
 	@Autowired
 	CategoriaRepository repository;
 	
