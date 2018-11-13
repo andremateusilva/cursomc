@@ -14,7 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.web.bind.annotation.Mapping;
+
 import com.andresilva.cursomc.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -39,7 +42,9 @@ public class Cliente implements Serializable {
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> Telefones = new HashSet<>();//SET é um conjunto, e não permite haver valores repetidos
 	
-	//private List<Pedido> pedidos = new ArrayList<>();
+	@JsonBackReference
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {
 		
@@ -110,13 +115,13 @@ public class Cliente implements Serializable {
 		Telefones = telefones;
 	}
 	
-//	public List<Pedido> getPedidos() {
-//		return pedidos;
-//	}
-//
-//	public void setPedidos(List<Pedido> pedidos) {
-//		this.pedidos = pedidos;
-//	}
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	@Override
 	public int hashCode() {
