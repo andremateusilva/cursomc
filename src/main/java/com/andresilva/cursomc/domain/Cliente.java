@@ -14,8 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.springframework.web.bind.annotation.Mapping;
-
 import com.andresilva.cursomc.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
