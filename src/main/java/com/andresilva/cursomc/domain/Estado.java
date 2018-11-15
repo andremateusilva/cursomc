@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Estado implements Serializable {
@@ -23,7 +24,8 @@ public class Estado implements Serializable {
 	private String nome;
 	
 	//MAPEAMENTO REVERSO DA TABELA ESTADO
-	@JsonBackReference
+	//@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "estado") //Atributo que mapeou do lado do objecto/entity cidade (neste caso claro)
 	private List<Cidade> cidades = new ArrayList<>();
  	
