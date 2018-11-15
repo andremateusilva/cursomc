@@ -12,6 +12,7 @@ public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//Atributo composto
+	// igual ao @id mas este é especial por ser um id do tipo atributo composto
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
 
