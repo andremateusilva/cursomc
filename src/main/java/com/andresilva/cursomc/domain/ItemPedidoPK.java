@@ -6,6 +6,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 // Class auxilixar para conter a chave primaria do ItemPedido
 // OBJECTO INCOPORÁVEL está a ser incoporado no objecto ItemPedido
 @Embeddable
@@ -15,9 +17,11 @@ public class ItemPedidoPK implements Serializable {
 
 	//existe refereencia para pedido e uma referencia para produto, porque sao os dois conceitos dos quais "ela está no meio"
 	// estas duas referefencias juntas é que identificam o item pedido 
+
 	@ManyToOne
 	@JoinColumn(name="pedido_id")
 	private Pedido pedido;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="produto_id")

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // ISTO É UMA CLASS DE ASSOCIAÇÃO
 @Entity
 public class ItemPedido implements Serializable {
@@ -14,6 +16,7 @@ public class ItemPedido implements Serializable {
 	//Atributo composto
 	// igual ao @id mas este é especial por ser um id do tipo atributo composto
 	@EmbeddedId
+	@JsonIgnore
 	private ItemPedidoPK id = new ItemPedidoPK();
 
 	private Double desconto;
@@ -32,6 +35,7 @@ public class ItemPedido implements Serializable {
 		this.preco = preco;
 	}
 	
+	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
