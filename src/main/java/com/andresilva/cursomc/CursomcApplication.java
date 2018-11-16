@@ -74,6 +74,11 @@ public class CursomcApplication implements CommandLineRunner {
 		// Aqui estamos a criar objectos do tipo de Categoria
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
+		Categoria cat3 = new Categoria(null, "casa mesa e banho");
+		Categoria cat4 = new Categoria(null, "Fotografia");
+		Categoria cat5 = new Categoria(null, "Livros de BD");
+		Categoria cat6 = new Categoria(null, "Video jogos");
+		Categoria cat7 = new Categoria(null, "Música");
 		
 		// Aqui estamos a criar objectos do tipo de Produto
 		Produto p1 = new Produto(null, "Computador", 2000.00);
@@ -101,7 +106,7 @@ public class CursomcApplication implements CommandLineRunner {
 		estado2.getCidades().addAll(Arrays.asList(cidade2, cidade3));
 		
 		// Aqui estamos a salvar/popular a base dados com as tabelas correspondentes por EX: tabela categorias, produtos e a tabela entermédia (visto haver uma relação de muitos para muitos) 
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 	
 		estadoRepository.saveAll(Arrays.asList(estado1, estado2));

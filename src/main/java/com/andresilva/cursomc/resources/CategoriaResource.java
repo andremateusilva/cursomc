@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -37,6 +39,7 @@ public class CategoriaResource {
 	
 	@Autowired
 	CategoriaService service;
+	
 	
 	//GET All Categorias
 	@RequestMapping(method=RequestMethod.GET)
@@ -85,5 +88,30 @@ public class CategoriaResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	// Métedo para paginar os dados fornecidos (neste caso as categorias)
+	/*
+	 * neste uri vai ser construido como uma query string Ex: http://localhost/categorias?page=10&linesPerPage=1....etc
+	 * para isso usamos a anotação @RequestParam(value = "linesPerPage", defaultValue = "24") o valor é o nome da variavel 
+	 * para a a query string e o defaultValue é para que os paremetros possam ser OPTIONAL 
+	 * NOTA: no linesPage usamos os defaultValue é 24, porque 24 é multiplo de 1, 2, 3 e 4 .... e assim é mais facil 
+	 * organizar os dados de forma responsiva numa pagina conforme o tamanho....1 em 1, 2 em 2, 3 em 3
+	 */
+	
+	@RequestMapping(value="/page", method=RequestMethod.GET)
+	public ResponseEntity<Page<CategoriaDTO>> findPage(
+			@RequestParam(value = "page", defaultValue = "0") Integer page, 
+			@RequestParam(value = "linesPerPage", defaultValue = "24")Integer linesPage, 
+			@RequestParam(value = "orderBy", defaultValue = "nome")String orderBy, 
+			@RequestParam(value = "direction", defaultValue = "ASC")String direction) 
+	{
+		
+		Page<Categoria> categorias = service.findPage(page, linesPage, orderBy, direction);
+		
+		// o metedo .collect(Collectors.toList()); serve para converte/fazer cast novamente para o list
+		//List<CategoriaDTO> categoriaDTOs = categorias.stream().map(ob -> new CategoriaDTO(ob)).collect(Collectors.toList());
+		Page<CategoriaDTO> categoriaDTOs = categorias.map(ob -> new CategoriaDTO(ob));
+		return ResponseEntity.ok().body(categoriaDTOs);
 	}
 }
