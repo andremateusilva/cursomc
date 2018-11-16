@@ -1,5 +1,6 @@
 package com.andresilva.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,6 +16,14 @@ public class CategoriaService {
 
 	@Autowired
 	CategoriaRepository repository;
+	
+	public List<Categoria> findAll() {
+		List<Categoria> categorias = repository.findAll();
+		Optional<List<Categoria>> optionalCategorias = Optional.of(categorias);
+		
+		return optionalCategorias.orElseThrow(() -> new ObjectNotFoundException(    
+				"List não encontrada!!!"));
+	}
 	
 	public Categoria find(Integer id) {
 		Optional<Categoria> categoria = repository.findById(id);
