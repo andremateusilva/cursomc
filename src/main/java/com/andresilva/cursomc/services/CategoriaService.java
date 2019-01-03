@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.andresilva.cursomc.domain.Categoria;
+import com.andresilva.cursomc.domain.Cliente;
 import com.andresilva.cursomc.dto.CategoriaDTO;
 import com.andresilva.cursomc.repositories.CategoriaRepository;
 import com.andresilva.cursomc.services.exceptions.DataIntegrityException;
@@ -45,11 +46,12 @@ public class CategoriaService {
 		categoria.setId(null);
 		return repository.save(categoria);
 	}
-	
+
 	public Categoria update(Categoria categoria) {
-		find(categoria.getId());
-		//O métedo save é usado para gravar novos registos e também para actualizar
-		return repository.save(categoria);
+		Categoria newCategoria = find(categoria.getId());
+		updateData(newCategoria, categoria);
+		
+		return repository.save(newCategoria);
 	}
 	
 	public void delete(Integer id) {
@@ -72,4 +74,9 @@ public class CategoriaService {
 	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
 		return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
 	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
+	}
+	
 }
