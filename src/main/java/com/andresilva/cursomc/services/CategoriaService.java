@@ -60,7 +60,6 @@ public class CategoriaService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possivel excluir uma categoria que tem produtos!!");
 		}
-		
 	}
 	
 	// Métedo para paginar os dados fornecidos (neste caso as categorias)

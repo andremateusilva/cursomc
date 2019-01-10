@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.andresilva.cursomc.domain.Categoria;
 import com.andresilva.cursomc.domain.Cliente;
+import com.andresilva.cursomc.dto.CategoriaDTO;
 import com.andresilva.cursomc.dto.ClienteDTO;
+import com.andresilva.cursomc.dto.ClienteNewDTO;
 import com.andresilva.cursomc.services.ClienteService;
 
 @RestController
@@ -37,9 +40,21 @@ public class ClientesResource {
 		
 		return ResponseEntity.ok().body(cliente);
 	}
-	
-	/////////////////////////////////////////////////////
-	
+
+	@RequestMapping(method=RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO clienteNewDTO) { 
+		//QUANDO USAMOS ASSERTIONS E ASSIM TEMOS QUE USAR O @Valid
+		Cliente cliente = service.fromDTO(clienteNewDTO);
+		cliente = service.insert(cliente);
+		
+		/*
+		 * BOA PRÁTICA REST: após ser feita a inseerção num banco dados deve ser dada uma resposta com codigo de 
+		 * sucesso (201) e dar o URI do objecto adicionado
+		 */
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
+		
+		return ResponseEntity.created(uri).build();
+	}
 	
 	//GET All Clientes
 	@RequestMapping(method=RequestMethod.GET)
@@ -77,7 +92,7 @@ public class ClientesResource {
 	 */
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
-	public ResponseEntity<Page<ClienteDTO>> findPage(
+	public ResponseEntity<Page<ClienteDTO>> findPage (
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 
 			@RequestParam(value = "linesPerPage", defaultValue = "24")Integer linesPage, 
 			@RequestParam(value = "orderBy", defaultValue = "nome")String orderBy, 
