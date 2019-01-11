@@ -53,7 +53,6 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(categoriaDTOs);
 	}
 		
-	
 	//GET
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
